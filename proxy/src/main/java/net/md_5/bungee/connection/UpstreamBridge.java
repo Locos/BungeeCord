@@ -1,21 +1,17 @@
 package net.md_5.bungee.connection;
 
 import net.md_5.bungee.BungeeCord;
-import net.md_5.bungee.EntityMap;
 import net.md_5.bungee.UserConnection;
 import net.md_5.bungee.Util;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
-import net.md_5.bungee.api.event.PluginMessageEvent;
+import net.md_5.bungee.api.event.PlayerPluginMessageEvent;
 import net.md_5.bungee.netty.ChannelWrapper;
 import net.md_5.bungee.netty.PacketHandler;
 import net.md_5.bungee.protocol.PacketWrapper;
-import net.md_5.bungee.protocol.packet.KeepAlive;
-import net.md_5.bungee.protocol.packet.Chat;
-import net.md_5.bungee.protocol.packet.TabComplete;
-import net.md_5.bungee.protocol.packet.ClientSettings;
-import net.md_5.bungee.protocol.packet.PluginMessage;
+import net.md_5.bungee.protocol.packet.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,7 +123,7 @@ public class UpstreamBridge extends PacketHandler
             throw new CancelSendSignal();
         }
 
-        PluginMessageEvent event = new PluginMessageEvent( con, con.getServer(), pluginMessage.getTag(), pluginMessage.getData().clone() );
+        PlayerPluginMessageEvent event = new PlayerPluginMessageEvent( con, con.getServer(), pluginMessage.getTag(), pluginMessage.getData().clone() );
         if ( bungee.getPluginManager().callEvent( event ).isCancelled() )
         {
             throw new CancelSendSignal();

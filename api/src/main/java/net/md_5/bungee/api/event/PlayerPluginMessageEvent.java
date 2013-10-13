@@ -7,12 +7,12 @@ import net.md_5.bungee.api.connection.Connection;
 import net.md_5.bungee.api.plugin.Cancellable;
 
 /**
- * Event called when a plugin message is sent to the client by the server.
+ * Event called when a plugin message is sent to the server by the client.
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class PluginMessageEvent extends TargetedEvent implements Cancellable
+public class PlayerPluginMessageEvent extends TargetedEvent implements Cancellable
 {
 
     /**
@@ -28,7 +28,7 @@ public class PluginMessageEvent extends TargetedEvent implements Cancellable
      */
     private final byte[] data;
 
-    public PluginMessageEvent(Connection sender, Connection receiver, String tag, byte[] data)
+    public PlayerPluginMessageEvent(Connection sender, Connection receiver, String tag, byte[] data)
     {
         super( sender, receiver );
         this.tag = tag;
